@@ -60,12 +60,9 @@ var UIController = (function () {
 
 var controller = (function (budgetCtrl, UICtrl) {
 
-  var DOM = UICtrl.getDOMstrings();
+  var setupEventListeners = function() {
 
-  var ctrlAddItem = function () {
-    var input = UICtrl.getInput();
-    console.log(input);
-  }
+    var DOM = UICtrl.getDOMstrings();
 
   document.querySelector(DOM.inputBtn).addEventListener('click', ctrlAddItem)
 
@@ -74,5 +71,21 @@ var controller = (function (budgetCtrl, UICtrl) {
       ctrlAddItem();
     }
   });
+ 
+  };
+
+  var ctrlAddItem = function () {
+    var input = UICtrl.getInput();
+  };
+
+return {
+  init: function() {
+    console.log('hello');
+  setupEventListeners();
+}
+};
+  
 
 })(budgetController, UIController);
+
+controller.init();

@@ -66,6 +66,17 @@ define variable DOMstrings
 
 - put inputBtn in DOMstrings, then change'add_btn' into DOM.inputBtn
 
+3. at controller
+
+- define variable setupEventListeners -> declare function
+ : move event of DOM.inputBtn and event of 'keypress' to function of var setupEventListener 
+ : move var DOM into function of var setupEventListener
+
+ : add return and function init in it, call setupEventListeners
+
+- call controller.init outside whole codes 
+
+
 
 
 
