@@ -77,6 +77,68 @@ define variable DOMstrings
 - call controller.init outside whole codes 
 
 
+4. at budgetController
+define var Expense : decline function; properties- id, description, value
+                          : respectively construct id, description, value 
+
+define var Income : decline same as Expense function
+
+define var allExpenses :  set properties into Array
+define var allIncomes : set properties into Array
+totalExpenses : set 0
+
+define var data : 
+- make object 
+                  1. put allItems and make object of it
+			put  exp : set array, inc : set array
+	     2. put totals and make object of it
+                  		put  exp : 0, inc: 0
+ 
+-add return under the object of var data
+ 	1.make object: addItem 
+	       apply function on that
+                    its properties: type, des, val
+
+	       set newItem is new Expense Id, des, val
+                    define newItem 	
+
+	[Create new item based on 'inc' or 'exp' type]		
+
+	2. IF type is the same as 'exp'
+	then, newItem is the same as new Expense values
+	ELSE IF type is the same as 'inc'
+	newItem is the same as new Income values
+	add var ID next to newItem
+
+	3. [Create new ID]
+	set ID is allItems[type][allItems[type] length in var data - 1].id + 1 in var data
+ 
+
+	4. [push it into our data structure]
+	push newItem at allItems's type array varialble data
+ 
+	5. [return the new element]
+	add return newItem 
+
+5. [Add the item to the budget controller] into function of  variable ctrlAddItem at controller
+- var newItem is the same as 
+add Item properties:type, description, value in var budgetCtrl
+- take input, newItem out to var syntax 
+- remove text 'var' of input, newItem
+
+6. back to budgetcontroller
+
+fix [create new ID]
+IF syntax hug defining ID 
+IF allItems[type] length in var data is greater than 0,
+then allItems[type][allItems[type] length in var data - 1].id + 1 in var data
+ELSE then, ID is zero
+
+
+					.
+
+
+
 
 
 
