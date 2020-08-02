@@ -134,8 +134,59 @@ IF allItems[type] length in var data is greater than 0,
 then allItems[type][allItems[type] length in var data - 1].id + 1 in var data
 ELSE then, ID is zero
 
+7. at UI CONTROLLER
 
-					.
+1.call addListItem and decline function of it
+properties obj, type
+
+(create HTML string with placeholder text)
+
+put income list template from index.html 
+then, put them in '' and call html and declare variable html above them
+
+
+put expense list template from index.html 
+then, put them in '' and call html 
+
+create if-else statement : if - type is 'inc', else if - type is 'exp'
+
+put %%placeholder at id number, description, value
+
+-------------------------------------------------------------------------
+(replace the placeholder text with some actual data)
+declare newHtml with html
+
+newHtml : replace html code %id% -> obj.id
+newHtml : replace newHtml code %description% -> obj.description
+newHtml : replace newHtml code %value% -> obj.value
+
+add incomeContainer in var DOMstrings and set class income_list
+add expenseContainer in var DOMstrings and set class expense_list
+
+declare element with html and newHtml
+put element call incomeContainer at DOMstrings IF statement 
+put element call expenseContainer at DOMstrings ELSE statement
+
+
+(Insert the HTML into the DOM)
+ insert newHtml in beforeend in DOM:element using method:inserAdjacentHTML
+
+var ctrlAddItem
+(add the item to the UI)
+in UICtrl, write addListItem put constructers newItem, input.type 
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

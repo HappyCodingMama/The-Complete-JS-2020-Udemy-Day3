@@ -32,13 +32,13 @@ var controller = (function (budgetCtrl, UICtrl) {
 
 var budgetController = (function () {
 
-  var Expense = function(id, description, value) {
+  var Expense = function (id, description, value) {
     this.id = id;
     this.description = description;
     this.value = value;
   };
 
-  var Income = function(id, description, value) {
+  var Income = function (id, description, value) {
     this.id = id;
     this.description = des;
     this.value = val;
@@ -51,36 +51,36 @@ var budgetController = (function () {
 
   var data = {
     allItems: {
-      exp : [],
-      inc : []
+      exp: [],
+      inc: []
     },
     totals: {
-      exp : 0,
-      inc : 0
+      exp: 0,
+      inc: 0
     }
   };
 
-    return {
-      addItem: function(type, des, val) {
+  return {
+    addItem: function (type, des, val) {
       var newItem, ID;
 
-        if (data.allItems[type].length > 0) {
-          ID = data.allItems[type][data.allItems[type].length-1].id + 1;
-        }else{
-          ID = 0;
-        };
+      if (data.allItems[type].length > 0) {
+        ID = data.allItems[type][data.allItems[type].length - 1].id + 1;
+      } else {
+        ID = 0;
+      };
 
-        if (type === 'exp') {
-          newItem = new Expense(ID, des, val);
-        } else if ( type === 'inc') {
-          newItem = new Income(ID, des, val );
-        }
+      if (type === 'exp') {
+        newItem = new Expense(ID, des, val);
+      } else if (type === 'inc') {
+        newItem = new Income(ID, des, val);
+      }
 
-        data.allItems[type].push(newItem);
+      data.allItems[type].push(newItem);
 
-        return newItem;
+      return newItem;
     },
-    testing: function() {
+    testing: function () {
       console.log(data);
     }
   };
@@ -89,6 +89,8 @@ var budgetController = (function () {
 
 })();
 
+
+//UI CONTROLLER
 var UIController = (function () {
 
   var DOMstrings = {
@@ -97,6 +99,19 @@ var UIController = (function () {
     inputValue: '.add_value',
     inputBtn: '.add_btn'
   };
+
+  var html;
+
+  addListItem = function (obj, type) {
+    if (type === 'inc') {
+
+      html = '<div class="item clearfix" id="income-%id%"><div class="item-description">%description%</div><div class="right clearfix"><div class="item_value">%value%</div><div class="item_delete"><button class="item_delete--btn"><i class="fa fa-times" aria-hidden="true"></i></button></div></div></div>';
+
+    } else if (type === 'exp') {
+      html = '<div class="item clearfix" id="expense-%id%"><div class="item-description">%description%</div><div class="right clearfix"><div class="item_value">%value%</div><div class="item_percentage">21%</div><div class="item_delete"><button class="item_delete--btn"><i class="fa fa-times" aria-hidden="true"></i></button></div></div></div>';
+
+    }
+  }
 
   return {
     getInput: function () {
@@ -110,39 +125,43 @@ var UIController = (function () {
     getDOMstrings: function () {
       return DOMstrings;
     }
-  }
+  };
+
+
+
 })();
 
+//GLOBAL APP CONTROLLER
 var controller = (function (budgetCtrl, UICtrl) {
 
-  var setupEventListeners = function() {
+  var setupEventListeners = function () {
 
     var DOM = UICtrl.getDOMstrings();
 
-  document.querySelector(DOM.inputBtn).addEventListener('click', ctrlAddItem)
+    document.querySelector(DOM.inputBtn).addEventListener('click', ctrlAddItem)
 
-  document.addEventListener('keypress', function (event) {
-    if (event.keyCode === 13 || event.which === 13) {
-      ctrlAddItem();
-    }
-  });
- 
+    document.addEventListener('keypress', function (event) {
+      if (event.keyCode === 13 || event.which === 13) {
+        ctrlAddItem();
+      }
+    });
+
   };
 
   var ctrlAddItem = function () {
- 
+
     var input, newItem;
     input = UICtrl.getInput();
     newItem = budgetCtrl.addItem(input.type, input.description, input.value);
   };
 
-return {
-  init: function() {
-  setupEventListeners();
-}
+  return {
+    init: function () {
+      setupEventListeners();
+    }
 
-};
-  
+  };
+
 
 })(budgetController, UIController);
 
