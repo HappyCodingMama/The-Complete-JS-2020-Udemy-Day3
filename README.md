@@ -142,7 +142,7 @@ properties obj, type
 (create HTML string with placeholder text)
 
 put income list template from index.html 
-then, put them in '' and call html and declare variable html above them
+then, put them in '' and call html and declare variable html in function
 
 
 put expense list template from index.html 
@@ -169,11 +169,14 @@ put element call expenseContainer at DOMstrings ELSE statement
 
 
 (Insert the HTML into the DOM)
- insert newHtml in beforeend in DOM:element using method:inserAdjacentHTML
+ DOM:element using method:inserAdjacentHTML 
+-> insert newHtml in beforeend
 
 var ctrlAddItem
 (add the item to the UI)
 in UICtrl, write addListItem put constructers newItem, input.type 
+
+
 
 
 

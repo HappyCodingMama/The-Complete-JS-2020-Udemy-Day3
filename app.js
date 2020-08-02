@@ -40,13 +40,9 @@ var budgetController = (function () {
 
   var Income = function (id, description, value) {
     this.id = id;
-    this.description = des;
-    this.value = val;
+    this.description = description;
+    this.value = value;
   };
-
-  var allExpenses = [];
-  var allIncomes = [];
-  var totalExpenses = 0;
 
 
   var data = {
@@ -97,37 +93,47 @@ var UIController = (function () {
     inputType: '.add_type',
     inputDescription: '.add_description',
     inputValue: '.add_value',
-    inputBtn: '.add_btn'
+    inputBtn: '.add_btn',
+    incomeContainer: '.income_list',
+    expensesContainer: '.expenses_list'
   };
-
-  var html;
-
-  addListItem = function (obj, type) {
-    if (type === 'inc') {
-
-      html = '<div class="item clearfix" id="income-%id%"><div class="item-description">%description%</div><div class="right clearfix"><div class="item_value">%value%</div><div class="item_delete"><button class="item_delete--btn"><i class="fa fa-times" aria-hidden="true"></i></button></div></div></div>';
-
-    } else if (type === 'exp') {
-      html = '<div class="item clearfix" id="expense-%id%"><div class="item-description">%description%</div><div class="right clearfix"><div class="item_value">%value%</div><div class="item_percentage">21%</div><div class="item_delete"><button class="item_delete--btn"><i class="fa fa-times" aria-hidden="true"></i></button></div></div></div>';
-
-    }
-  }
 
   return {
     getInput: function () {
       return {
         type: document.querySelector(DOMstrings.inputType).value,
         description: document.querySelector(DOMstrings.inputDescription).value,
-        value: document.querySelector(DOMstrings.inputValue).value,
+        value: document.querySelector(DOMstrings.inputValue).value
       };
+    },
+
+
+    addListItem: function (obj, type) {
+      var html, newHtml, element;
+
+      if (type === 'inc') {
+        element = DOMstrings.incomeContainer;
+
+        html = '<div class="item clearfix" id="income-%id%"><div class="item-description">%description%</div><div class="right clearfix"><div class="item_value">%value%</div><div class="item_delete"><button class="item_delete--btn"><i class="fa fa-times" aria-hidden="true"></i></button></div></div></div>';
+
+      } else if (type === 'exp') {
+        element = DOMstrings.expensesContainer;
+
+        html = '<div class="item clearfix" id="expense-%id%"><div class="item-description">%description%</div><div class="right clearfix"><div class="item_value">%value%</div><div class="item_percentage">21%</div><div class="item_delete"><button class="item_delete--btn"><i class="fa fa-times" aria-hidden="true"></i></button></div></div></div>';
+
+      }
+
+      newHtml = html.replace('%id%', obj.id);
+      newHtml = newHtml.replace('%description%', obj.description);
+      newHtml = newHtml.replace('%value%', obj.value);
+
+      document.querySelector(element).insertAdjacentHTML('beforeend', newHtml);
     },
 
     getDOMstrings: function () {
       return DOMstrings;
     }
   };
-
-
 
 })();
 
@@ -149,10 +155,13 @@ var controller = (function (budgetCtrl, UICtrl) {
   };
 
   var ctrlAddItem = function () {
-
     var input, newItem;
+
     input = UICtrl.getInput();
+
     newItem = budgetCtrl.addItem(input.type, input.description, input.value);
+
+    UICtrl.addListItem(newItem, input.type);
   };
 
   return {

@@ -149,13 +149,21 @@ button {
 }
 
 .container.clearfix {
-  background-color: white;
   display: flex;
-  align-items: center;
+  flex-direction: inline;
   justify-content: center;
 }
+
 .income {
+  display: flex;
+  flex-direction: column;
   padding-right: 30px;
+}
+
+.expenses {
+  display: flex;
+  flex-direction: column;
+
 }
 
 
@@ -175,11 +183,9 @@ button {
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid rgb(220, 220, 220);
+  width: 300px;
   padding: 8px;
 }
-
-
-
 
 .expenses_title {
   font-size: 1rem;
