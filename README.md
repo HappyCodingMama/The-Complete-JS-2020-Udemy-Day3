@@ -177,7 +177,7 @@ var ctrlAddItem
 in UICtrl, write addListItem put constructers newItem, input.type 
 
 
-8.(above getDOMstrings) at UIController
+8. (above getDOMstrings) at UIController
 call clearFields, declare anonymous function
 
 define fields, fieldsArr
@@ -199,7 +199,25 @@ go variable ctrlAddItem in var Controller
 (clear the fields)
 UICtrl -> call clearFields 
 
- 
+ 9. go! variable controller
+
+-define updateBudget and decline anonymous function
+
+call updateBudget in variable ctrlAddItem
+
+
+go! getInput method
+(value is 'string' so, we whould convert it to 'number')
+- use parseFloat
+
+go! var ctrlAddItem
+put IF statement next to var input
+: input.description is not "" and is not isNaN(value at input) and
+input.value greater than 0
+move below 4 stuff into IF result of statement
+
+
+
  
 
 
