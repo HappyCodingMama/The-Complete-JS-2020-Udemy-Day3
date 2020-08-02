@@ -177,6 +177,33 @@ var ctrlAddItem
 in UICtrl, write addListItem put constructers newItem, input.type 
 
 
+8.(above getDOMstrings) at UIController
+call clearFields, declare anonymous function
+
+define fields, fieldsArr
+field is 
+set method querySelectorAll into DOM
+object inputDescription of DOMstrings +
+ 'comma' + object inputValue of DOMstrings
+
+fieldsArr is 
+set Array and  use prototype and apply method slice and call field
+
+loop -> set fieldsArr, use forEach, and define function of forEach
+properties:current, index, array
+- current value is ""  
+ 
+call focus method at filedsArr[0] 
+
+go variable ctrlAddItem in var Controller
+(clear the fields)
+UICtrl -> call clearFields 
+
+ 
+ 
+
+
+
 
 
 
