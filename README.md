@@ -78,10 +78,10 @@ define variable DOMstrings
 
 
 4. at budgetController
-define var Expense : decline function; properties- id, description, value
+define var Expense : declare function; properties- id, description, value
                           : respectively construct id, description, value 
 
-define var Income : decline same as Expense function
+define var Income : declare same as Expense function
 
 define var allExpenses :  set properties into Array
 define var allIncomes : set properties into Array
@@ -136,7 +136,7 @@ ELSE then, ID is zero
 
 7. at UI CONTROLLER
 
-1.call addListItem and decline function of it
+1.call addListItem and declare function of it
 properties obj, type
 
 (create HTML string with placeholder text)
@@ -201,7 +201,7 @@ UICtrl -> call clearFields
 
  9. go! variable controller
 
--define updateBudget and decline anonymous function
+-define updateBudget and declare anonymous function
 
 call updateBudget in variable ctrlAddItem
 
@@ -215,6 +215,61 @@ put IF statement next to var input
 : input.description is not "" and is not isNaN(value at input) and
 input.value greater than 0
 move below 4 stuff into IF result of statement
+
+10. go! var budgetController
+
+-put method calculateBudget and declare anonymous function
+
+-define variable calculateTotal and declare function, property:type,
+define variable sum is zero
+data.allItems[type] make loop -> use forEach: its function property:cur
+sum plus equals cur.value
+data.totals[type] equals sum
+
+(calculate total income and expenses)
+go! method calculateBudget
+call budget method calculateTotal 'exp'
+call budget method calculateTotal 'inc'
+
+go! variable data
+add method budget is zero
+
+(calculate the budget: income-expenses)
+method budget of var data is data.totals.inc - data.totals.exp
+
+go! variable data
+add method percentage is minus one
+
+(calculate the percentage of income that we spent)
+
+method percentage of var data is (data.totals.exp / data.totals.inc) * 100
+and use Math.round to make integer 
+
+
+go! var updateBudget
+call method calculateBudget at property budgetCtrl
+
+
+go! below method calculateBudget
+make method getBudget, declare anonymous function
+return 
+method budget : method budget at var data
+totalInc : data.totals.inc
+totalExp : exp
+percentage : percentage
+
+go! var updateBudget
+variable budget -> call method getBudget at budgetCtrl
+
+testing: write console.log -> call var budget
+
+go! method calculateBudget
+(calculate the percentage of income that we spent)
+put IF statement : if -> data.totals.inc greater than 0
+then, method percentage of var data  happen
+if not -> method percentage of var data  is minus one
+
+
 
 
 
