@@ -270,6 +270,44 @@ then, method percentage of var data  happen
 if not -> method percentage of var data  is minus one
 
 
+11. Go! UIController
+
+- add object displayBudget above object getDOMstrings
+declare function, property:obj
+
+- add objects at var DOMstrings
+ budgetLavel -> class budget_value
+ incomeLabel -> class budget_income-value
+ exensesLabel -> class budget_expenses-value
+percentageLabel -> class budget_expenses-percentage
+
+- go back to object displayBudget
+add text: obj.budget using method textContent-> DOM object DOMstrings.budgetLabel
+DOMstrings.incomeLabel:obj.totalInc, DOMstrings.expensesLabel:totalExp,
+ DOMstrings.percentageLabel:obj.percentage
+
+-Go! controller
+call method displayBudget, property: var budget at UICtrl
+
+-Go!object displayBudget
+add IF statement 
+obj.percentage is greater than 0,
+then add obj.percentage plus text % at DOM percentageLabel
+ELSE : then add obj.percentage text --- at DOM percentageLabel
+
+-back to var controller
+set initialization : at function of return 
+method displayBudget, property: none at UICtrl
+-add object budget - 0, totalInc - 0, totalExp - 0, percentage - -1 
+
+
+
+
+
+
+
+
+
 
 
 
