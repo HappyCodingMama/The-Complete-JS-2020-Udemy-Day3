@@ -478,7 +478,30 @@ add var months[month] + '.' + var year, use method textContent at DOM element:DO
 go! init function
 call displayMonth at UICtrl
 
-19. 
+19. go! controller
+in var setupEventListeners
+-> add event DOM element - DOM.inputType : when 'change', declare changedType at var UICtrl
+
+
+go! UIController
+
+make object changedType - declare anonymous function
+define var fields is DOM element(DOMstrings.inputType + ',' + DOMstrings.inputDescrption+',' +
+DOMstrings.inputValue) select All
+
+nodeListForEach(fields, declare function property:cur
+cur.classList.toggle('red-focus')
+
+apply classList.toggle('red') to DOM element:DOMstrings.inputBtn 
+
+move var nodeListForEach after formatNumber
+
+
+
+
+
+
+
 
 
 
