@@ -300,6 +300,118 @@ set initialization : at function of return
 method displayBudget, property: none at UICtrl
 -add object budget - 0, totalInc - 0, totalExp - 0, percentage - -1 
 
+12. go! var UIController
+- add object container is class container in var DOMstrings
+
+go! var controller 
+var DOM : add event -> DOM element - DOM.container
+     when click, apply ctrlDeleteItem
+
+(after var ctrlAddItem)
+define variable ctrlDeleteItem, declare function, property:event
+-define var itemID
+
+fix html of object addListItem income%id% -> inc%id%, 
+expenses%id%-> exp%id%
+
+-back to var ctrlDeleteItem
+ itemid equals event.parentNode*4.id
+
+add IF-ELSE statement
+if: itemID, then 
+define splitID, type, ID with itemID
+itemID equals itemID.split['-']
+type equals splitID[0]
+ID equals splitID[1]
+
+13. go! budgetController
+
+add object: deleteItem, declare function- properties: type, id
+
+define var ids, index
+
+data.allItems[type]. 
+ - use map and declare callback function property:current
+ - return current.id
+
+- index equals ids. 
+      call id indexnumber using indexOf 
+  IF-ELSE statement
+   if : index is not -1 -> data.allItems[type].splice(index, 1)
+
+
+(delete the item from the data structure)
+go! var controller
+budgetCtrl.deleteItem properties: type, ID
+above that, ID -> use method parseInt to make integer ID
+
+14. go! UI controller
+
+make object deleteListItem, declare function - property:selectorID
+
+var el equals DOM element selectorID
+add el.parentNode.removeChild(el)
+
+go! var ctrlDelteItem
+
+in IF statement
+(delete the item from the UI)
+call method deleteListItem(itemID) at var UICtrl
+
+(update and show the new budget)
+call updateBudget
+
+15. 
+
+go! var budgetController
+- make object calculatePercentages 
+: declare anonymous function
+: Expense.prototype.calcPercentage equals function- property totalIncome
+
+- add this.percentage equals minus one at var Expense
+
+back to Expense.prototype.calcPercentage 
+- add IF-ELSE statement
+if : totalIncome is greater than 0
+then, this.percentage equals (this.value/totalIncome) * 100
+and use Math.round to make integer
+
+else: this.percentage equals minus one
+
+Expense.prototype.getPercentage is anonymous function
+: return this.percentage
+
+
+add object calculatePercentages
+
+- Loop data.allItems.exp using forEach 
+declare function of forEach : property- cur
+call cur.calcPercentage(data.totals.inc)
+
+make objet getPercentages - declare anonymous function
+1.define var allPerc
+: Loop data.allItems.exp using map
+declare function of map : property- cur 
+-> return cur.getPercentage
+
+2.return allPerc
+
+go! var updatePercentages
+(calculate percentages)
+call calculatePercentages at var budgetCtrl
+
+(read percentages from the budget controller)
+define var percentages -> call getPercentages at var budgetCtrl
+
+(update the UI with the new percentages)
+
+
+ 
+
+
+
+
+
 
 
 
