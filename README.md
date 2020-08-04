@@ -461,6 +461,26 @@ define var type, int, dec with numSplit
   
 the rest of DOM element -> respectively add 'inc', 'exp'
 
+18. go! UI controller
+make object displayMonth - declare anonymous function 
+- define var now, month, year
+  now -> call new Date 
+  year ->call getFullYear at var now
+  month -> call getMonth at var now
+  months -> make array put months' title January, February ---
+ in it
+
+add object dateLabel in var DOMstrings -> class budget_title--month
+
+back to object displayMonth
+add var months[month] + '.' + var year, use method textContent at DOM element:DOMstrings.dateLabel
+
+go! init function
+call displayMonth at UICtrl
+
+19. 
+
+
 
 
 

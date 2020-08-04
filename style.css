@@ -213,3 +213,11 @@ button {
 .item-description {
   font-size: 0.8rem;
 }
+
+.red {
+  color: orangered;
+}
+
+.red-focus {
+  border: 1px solid orangered
+}
