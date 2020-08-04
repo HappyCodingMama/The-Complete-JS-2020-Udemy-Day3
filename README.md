@@ -389,12 +389,12 @@ declare function of forEach : property- cur
 call cur.calcPercentage(data.totals.inc)
 
 make objet getPercentages - declare anonymous function
-1.define var allPerc
+1. define var allPerc
 : Loop data.allItems.exp using map
 declare function of map : property- cur 
 -> return cur.getPercentage
 
-2.return allPerc
+2. return allPerc
 
 go! var updatePercentages
 (calculate percentages)
@@ -403,10 +403,64 @@ call calculatePercentages at var budgetCtrl
 (read percentages from the budget controller)
 define var percentages -> call getPercentages at var budgetCtrl
 
-(update the UI with the new percentages)
+16.
+back to object displayPercentages
+- define variable fields DOM element:DOMstrings.expensesPercLabel
+select All
+
+- define var nodeListForEach, declare function, property:list, callback
+:Loop -> use FOR
+call callback : list[i], i
 
 
+nodeListForEach-> at fields, declare function, property:current, index
+IF-ELSE statement
+if: percentages[index] greater than 0,
+then current.textContent equals percentages[index] plus '%'
+else: curremnt.textContent equals percentages[index] plus '-'
+
+go!var updatePercentages in var controller
+
+((update the UI with the new percentages)
+call displayPercentages(percentages) at var UIctrl
+
+17. go! UI controller
+make object formatNumber: declare function - properties: num, type
+
+
+num equals, use method Math.abs to make decimal numbers
+num equals, use toFixed to make two decimal numbers
+
+numSplit equals, use split('.')
+define varl numSplit
+
+-int equals numSplit[0]
+IFstatement
+if: int.length is greater than 3
+	then, int euqals int.substr(0,int.length - 3) plus ','
+	 plus int.substr(int.length - 3,3)
+
+-dec equal numSplit[1]
+
+-return (IF type is equals 'exp', TRUE is '-', FALSE is '+') +
+''+int+'.' + dec
  
+
+**move above object formatNumber to top par, then add var, change : -> to =
+
+
+go! newHTML
+add formatNumber outside obj.value , plus type next to obj.value
+
+go! object displayBudget
+put formatNumber outside obj.budget at DOM element: DOMstrings.budgetLabel
+and add type next to obj.budget
+above it, tenery operator -> IF: obj.budget is greater than 0,
+TRUE: type = 'inc', FALSE: type = 'exp'
+define var type, int, dec with numSplit
+  
+the rest of DOM element -> respectively add 'inc', 'exp'
+
 
 
 
